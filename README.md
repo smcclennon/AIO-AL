@@ -3,7 +3,7 @@ A python script used for personal use to quickly and portably log useful informa
 
 This script logs various information about computer, it's hardware and network connections
 
-Features:
+# Features
 - Sort logs In folders; "Network Logs" & "System Info Logs"
 - Get Computer Name
 - Get Computer Manufacturer information
@@ -23,6 +23,8 @@ Features:
 - Get Active Internal Connections
 
 View [AIO-AL Releases](https://github.com/smcclennon/AIO-AL/releases)
+# Installation
+- Run the script (preferably from a USB stick)
 
 Requirements:
 - Python 3+
@@ -31,6 +33,7 @@ Requirements:
 - [psutil](https://pypi.org/project/psutil/)
 - [requests](https://pypi.org/project/requests/)
 
+# Screenshots
 Example Output: [System Info Logs](Example%20Output/System%20Info%20Logs) - [Network Logs](Example%20Output/Network%20Logs)
 
 ![AIO-AL](https://imgur.com/i7UWfoa.png)
