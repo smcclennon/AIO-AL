@@ -27,7 +27,7 @@ View [AIO-AL Releases](https://github.com/smcclennon/AIO-AL/releases)
 
 Example Logs: [System Log](Example Output/System Info Logs/Cobalt.log), [Network Logs](Example Output/Network Logs/Cobalt [192.168.0.32].log)
 
-[AIO-AL](https://i.imgur.com/i7UWfoa.png)
+[AIO-AL](https://imgur.com/i7UWfoa.png)
 
 Requirements:
 - Python 3+
