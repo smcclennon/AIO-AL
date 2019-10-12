@@ -1,6 +1,6 @@
 #AIO-AL
-version='v1.0.3'
-#github.com/smcclennon
+version='v1.0.4'
+#github.com/smcclennon/AIO-AL
 
 
 #m1: import
@@ -10,7 +10,7 @@ globalstart=time.time(); importstart=time.time()
 try:
     import os, datetime, socket, urllib.request, sys, platform, psutil
 except:
-    print('\n\n\nError: unable to import one or more libraries\nVisit: github.com/smcclennon for support\n\nPress any key to exit')
+    print('\n\n\nError: unable to import one or more libraries\nVisit: github.com/smcclennon/AIO-AL for support\n\nPress any key to exit')
     os.system('pause>nul')
     exit()
 importend=time.time()
