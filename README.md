@@ -25,10 +25,6 @@ Features:
 
 View [AIO-AL Releases](https://github.com/smcclennon/AIO-AL/releases)
 
-Example Logs: [System Log](Example Output/System Info Logs/Cobalt.log), [Network Logs](Example Output/Network Logs/Cobalt [192.168.0.32].log)
-
-![AIO-AL](https://imgur.com/i7UWfoa.png)
-
 Requirements:
 - Python 3+
 - Windows
@@ -37,6 +33,12 @@ Requirements:
 - [requests](https://pypi.org/project/requests/)
 
 *This will be changed in a later version
+
+Example Logs: [System Log](Example Output/System Info Logs/Cobalt.log), [Network Logs](Example Output/Network Logs/Cobalt [192.168.0.32].log)
+
+![AIO-AL](https://imgur.com/i7UWfoa.png)
+
+
 
 
 First version of AIOAL (v1) coded on 10/11/18, completed at 5:30pm
