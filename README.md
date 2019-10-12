@@ -4,8 +4,7 @@ A python script used for personal use to quickly and portably log useful informa
 This script logs various information about computer, it's hardware and network connections
 
 Features:
-- Separate logs between folders; "Network Map Logs" & "System Info Logs"
-- Logs are
+- Sort logs In folders; "Network Logs" & "System Info Logs"
 - Get Computer Name
 - Get Computer Manufacturer information
 - Get BIOS Version
