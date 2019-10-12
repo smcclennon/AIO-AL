@@ -24,20 +24,17 @@ Features:
 
 View [AIO-AL Releases](https://github.com/smcclennon/AIO-AL/releases)
 
+Requirements:
+- Python 3+
+- Windows
+- An internet connection
+- [psutil](https://pypi.org/project/psutil/)
+- [requests](https://pypi.org/project/requests/)
+
 Example Output: [System Info Logs](Example%20Output/System%20Info%20Logs) - [Network Logs](Example%20Output/Network%20Logs)
 
 ![AIO-AL](https://imgur.com/i7UWfoa.png)
 
-Requirements:
-- Python 3+
-- Windows
-- An internet connection*
-- [psutil](https://pypi.org/project/psutil/)
-- [requests](https://pypi.org/project/requests/)
-
-*This will be changed in a later version
-
+First version of AIOAL (v1) coded on 10/11/18, completed at 5:30pm
 
 Written in Python 3.7.4 on Windows 10
-
-First version of AIOAL (v1) coded on 10/11/18, completed at 5:30pm
