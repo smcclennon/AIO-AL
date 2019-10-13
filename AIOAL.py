@@ -1,5 +1,5 @@
 #AIO-AL
-version='v1.0.4'
+ver='v1.0.5'
 #github.com/smcclennon/AIO-AL
 
 
@@ -28,7 +28,7 @@ def colour(var):
 def wtitle(var):
     cmd('title '+str(var))
 appid='A I O - A L'
-appname=appid+"  "+version
+appname=appid+"  "+ver
 
 
 #m3/mm1: sysinfo
