@@ -34,7 +34,7 @@ Requirements:
 - [requests](https://pypi.org/project/requests/)
 
 # Screenshots
-Example Output: [System Info Logs](Example%20Output/System%20Info%20Logs) - [Network Logs](Example%20Output/Network%20Logs)
+Example Output: [System Info Logs](Example%20Output/System%20Info%20Logs/Cobalt.log) - [Network Logs](Example%20Output/Network%20Logs/Cobalt%20%5B192.168.0.32%5D.log)
 
 ![AIO-AL](https://imgur.com/i7UWfoa.png)
 
