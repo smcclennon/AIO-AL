@@ -1,5 +1,5 @@
 #AIO-AL
-ver='1.1.0'
+ver='1.1.1'
 #github.com/smcclennon/AIO-AL
 
 
@@ -29,11 +29,13 @@ try: #Get latest version number (2.0.0)
     with urllib.request.urlopen("https://api.github.com/repos/smcclennon/AIO-AL/releases/latest") as url:
         data = json.loads(url.read().decode())
         latest=data['tag_name'][1:]
+        patchNotes=data['body']
 except:
     latest='0'
 if latest>ver:
     print('\nUpdate available!')
     print('Latest Version: v'+latest)
+    print('\n'+str(patchNotes)+'\n')
     confirm=input(str('Update now? [Y/n] ')).upper()
     if confirm=='Y':
         latestFilename='AIOAL v'+str(latest)+'.py'
