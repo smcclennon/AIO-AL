@@ -1,5 +1,5 @@
 #AIO-AL
-ver='1.1.1'
+ver='1.1.2'
 #github.com/smcclennon/AIO-AL
 
 
@@ -17,6 +17,21 @@ importend=time.time()
 importduration=importend-importstart
 print("Import completed in "+str(round(importduration, 2))+" seconds")
 
+
+
+#m2: rules
+def cmd(cmd):
+    os.system(cmd)
+def cls():
+    cmd('cls')
+def colour(var):
+    cmd('color '+str(var))
+def wtitle(var):
+    cmd('title '+str(var))
+appid='A I O - A L'
+appname=appid+"  v"+ver
+wtitle(appname+" - Performing System Info Scan...")
+colour('3f')
 
 #update
 try: #remove previous version if just updated
@@ -44,26 +59,12 @@ if latest>ver:
         f=open('AIOAL.tmp', 'w') #write the current filename to AIOAL.tmp
         f.write(str(os.path.basename(__file__)))
         f.close()
+        os.system('cls')
         os.system('"'+latestFilename+'"') #open latest version
         exit()
 
 
-#m2: rules
-def cmd(cmd):
-    os.system(cmd)
-def cls():
-    cmd('cls')
-def colour(var):
-    cmd('color '+str(var))
-def wtitle(var):
-    cmd('title '+str(var))
-appid='A I O - A L'
-appname=appid+"  v"+ver
-
-
 #m3/mm1: sysinfo
-wtitle(appname+" - Performing System Info Scan...")
-colour('3f')
 print("\nPerforming System Info Scan...")
 sysinfostart=time.time()
 print("[Preparing to log]")
