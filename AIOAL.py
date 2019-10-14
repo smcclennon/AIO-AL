@@ -1,5 +1,5 @@
 #AIO-AL
-ver='1.1.2'
+ver='1.2.0'
 #github.com/smcclennon/AIO-AL
 
 
@@ -8,10 +8,26 @@ print("Importing required libraries...")
 import time
 globalstart=time.time(); importstart=time.time()
 try:
-    import os,datetime,socket,urllib.request,sys,platform,psutil,json
+    import os,datetime,socket,urllib.request,sys,platform,json
 except:
-    print('\n\n\nError: unable to import one or more libraries\nVisit: github.com/smcclennon/AIO-AL for support\n\nPress any key to exit')
-    os.system('pause>nul')
+    print('\nError: unable to import one or more libraries\nVisit: github.com/smcclennon/AIO-AL for support\n\nPress enter to exit...')
+    input()
+    exit()
+try:
+    import psutil
+except:
+    print('\nError: unable to import "psutil"')
+    confirm=input(str('Attempt to install "psutil"? [Y/n] ')).upper()
+    if confirm=='Y':
+        try:
+            os.system('pip install psutil --user')
+            os.system('cls')
+            os.system('"'+str(os.path.basename(__file__))+'"')
+            exit()
+        except:
+            print('Failed to install "psutil"\nPress enter to exit...')
+        input()
+        exit()
     exit()
 importend=time.time()
 importduration=importend-importstart
