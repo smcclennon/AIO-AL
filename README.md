@@ -29,7 +29,6 @@ View [AIO-AL Releases](https://github.com/smcclennon/AIO-AL/releases)
 Requirements:
 - Python 3+
 - Windows
-- An internet connection
 - [psutil](https://pypi.org/project/psutil/)
 - [requests](https://pypi.org/project/requests/)
 
