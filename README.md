@@ -31,7 +31,6 @@ Requirements:
 - Python 3+
 - Windows
 - [psutil](https://pypi.org/project/psutil/)
-- [requests](https://pypi.org/project/requests/)
 
 # Screenshots
 Example Output: [System Info Logs](Example%20Output/System%20Info%20Logs/Cobalt.log) - [Network Logs](Example%20Output/Network%20Logs/Cobalt%20%5B192.168.0.32%5D.log)
