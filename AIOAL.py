@@ -1,5 +1,5 @@
 #AIO-AL
-ver='1.2.0'
+ver='1.2.1'
 #github.com/smcclennon/AIO-AL
 
 
@@ -46,7 +46,7 @@ def wtitle(var):
     cmd('title '+str(var))
 appid='A I O - A L'
 appname=appid+"  v"+ver
-wtitle(appname+" - Performing System Info Scan...")
+wtitle(appname+" - Checking for updates...")
 colour('3f')
 
 #update
@@ -64,12 +64,14 @@ try: #Get latest version number (2.0.0)
 except:
     latest='0'
 if latest>ver:
+    wtitle(appname+" - Update available!")
     print('\nUpdate available!')
     print('Latest Version: v'+latest)
     print('\n'+str(patchNotes)+'\n')
     confirm=input(str('Update now? [Y/n] ')).upper()
     if confirm=='Y':
         latestFilename='AIOAL v'+str(latest)+'.py'
+        wtitle(appname+" - Downloading updates...")
         print('Downloading '+latestFilename+'...') #Download latest version to cwd
         urllib.request.urlretrieve('https://github.com/smcclennon/AIO-AL/releases/latest/download/AIOAL.py', latestFilename)
         f=open('AIOAL.tmp', 'w') #write the current filename to AIOAL.tmp
@@ -81,6 +83,7 @@ if latest>ver:
 
 
 #m3/mm1: sysinfo
+wtitle(appname+" - Performing System Info Scan...")
 print("\nPerforming System Info Scan...")
 sysinfostart=time.time()
 print("[Preparing to log]")
