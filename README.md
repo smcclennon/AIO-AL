@@ -1,4 +1,4 @@
-# AIO-AL
+# Scan Me Now
 A python script used for personal use to quickly and portably log useful information about the machine's hardware and network connections
 
 This script logs various information about computer, it's hardware and network connections
@@ -23,7 +23,7 @@ This script logs various information about computer, it's hardware and network c
 - Get Public IP
 - Get Active Internal Connections
 
-View [AIO-AL Releases](https://github.com/smcclennon/AIO-AL/releases)
+View [SMN Releases](https://github.com/smcclennon/AIO-AL/releases)
 # Installation
 - Run the script (preferably from a USB stick)
 
@@ -35,7 +35,7 @@ Requirements:
 # Screenshots
 Example Output: [System Info Logs](Example%20Output/System%20Info%20Logs/Cobalt.log) - [Network Logs](Example%20Output/Network%20Logs/Cobalt%20%5B192.168.0.32%5D.log)
 
-![AIO-AL](https://imgur.com/i7UWfoa.png)
+![SMN](https://imgur.com/i7UWfoa.png)
 
 First version of AIOAL (v1) coded on 10/11/18, completed at 5:30pm
 
