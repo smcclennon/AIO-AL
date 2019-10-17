@@ -1,6 +1,7 @@
-#AIO-AL
-ver='1.2.2'
-#github.com/smcclennon/AIO-AL
+#SMN
+ver='2.0.0'
+proj='SMN'
+#github.com/smcclennon/SMN
 
 
 #m1: import
@@ -10,7 +11,7 @@ globalstart=time.time(); importstart=time.time()
 try:
     import os,datetime,socket,urllib.request,sys,platform,json
 except:
-    print('\nError: unable to import one or more libraries\nVisit: github.com/smcclennon/AIO-AL for support\n\nPress enter to exit...')
+    print('\nError: unable to import one or more libraries\nVisit: github.com/smcclennon/SMN for support\n\nPress enter to exit...')
     input()
     exit()
 try:
@@ -45,7 +46,7 @@ def colour(var):
     cmd('color '+str(var))
 def wtitle(var):
     cmd('title '+str(var))
-appid='A I O - A L'
+appid='Scan Me Now'
 appname=appid+"  v"+ver
 def appjob(job):
     if online==1:
@@ -55,35 +56,44 @@ def appjob(job):
 
 appjob("Checking for updates...")
 #update
+updateAttempt=0
+print('Checking for updates...')
 try: #remove previous version if just updated
-    with open('AIOAL.tmp', 'r') as content_file:
+    with open(proj+'.tmp', 'r') as content_file:
         os.remove(str(content_file.read()))
-    os.remove('AIOAL.tmp')
+    os.remove(proj+'.tmp')
 except:
     pass
-try: #Get latest version number (2.0.0)
-    with urllib.request.urlopen("https://api.github.com/repos/smcclennon/AIO-AL/releases/latest") as url:
-        data = json.loads(url.read().decode())
-        latest=data['tag_name'][1:]
-        patchNotes=data['body']
-        online=1
-except:
-    latest='0'
+while updateAttempt<3:
+    updateAttempt=updateAttempt+1
+    try: #Get latest version number (2.0.0)
+        with urllib.request.urlopen("https://smcclennon.github.io/update/api/2") as url:
+            global repo
+            repo=[]
+            for line in url.readlines():
+                repo.append(line.decode().strip())
+            api=repo[0] #latest release details
+            proj=repo[1] #project name
+            ddl=repo[2] #direct download
+        with urllib.request.urlopen(api) as url:
+            data = json.loads(url.read().decode())
+            latest=data['tag_name'][1:]
+            patchNotes=data['body']
+        updateAttempt=3
+    except:
+        latest='0'
 if latest>ver:
-    appjob('Update available!')
     print('\nUpdate available!')
     print('Latest Version: v'+latest)
     print('\n'+str(patchNotes)+'\n')
     confirm=input(str('Update now? [Y/n] ')).upper()
     if confirm=='Y':
-        latestFilename='AIOAL v'+str(latest)+'.py'
-        appjob('Downloading updates...')
+        latestFilename=proj+' v'+str(latest)+'.py'
         print('Downloading '+latestFilename+'...') #Download latest version to cwd
-        urllib.request.urlretrieve('https://github.com/smcclennon/AIO-AL/releases/latest/download/AIOAL.py', latestFilename)
-        f=open('AIOAL.tmp', 'w') #write the current filename to AIOAL.tmp
+        urllib.request.urlretrieve(ddl, latestFilename)
+        f=open(proj+'.tmp', 'w') #write the current filename to SMN.tmp
         f.write(str(os.path.basename(__file__)))
         f.close()
-        os.system('cls')
         os.system('"'+latestFilename+'"') #open latest version
         exit()
 
@@ -198,5 +208,5 @@ print("Log completed in "+str(round(netmapduration, 2))+" seconds")
 globalend=time.time()
 globalduration=globalend-globalstart
 appjob('Complete!')
-print("\n\nAll AIO-AL Logging Jobs Completed In "+str(round(globalduration, 2))+" seconds")
+print("\n\nAll "+proj+" Logging Jobs Completed In "+str(round(globalduration, 2))+" seconds")
 cmd('timeout 5')
