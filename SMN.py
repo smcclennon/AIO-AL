@@ -1,5 +1,5 @@
 #SMN
-ver='2.1.0'
+ver='2.1.1'
 proj='SMN'
 #github.com/smcclennon/SMN
 
@@ -54,9 +54,9 @@ def appjob(job):
     elif online==0:
         wtitle(appname+' [Offline] - '+str(job))
 
-appjob("Checking for updates...")
 #update
 updateAttempt=0
+appjob('Checking for updates...')
 print('Checking for updates...')
 try: #remove previous version if just updated
     with open(proj+'.tmp', 'r') as content_file:
@@ -68,6 +68,7 @@ while updateAttempt<3:
     updateAttempt=updateAttempt+1
     try: #Get latest version number (2.0.0)
         with urllib.request.urlopen("https://smcclennon.github.io/update/api/2") as url:
+            online=1
             global repo
             repo=[]
             for line in url.readlines():
@@ -94,10 +95,12 @@ if latest>ver:
         f=open(proj+'.tmp', 'w') #write the current filename to SMN.tmp
         f.write(str(os.path.basename(__file__)))
         f.close()
+        os.system('cls')
         os.system('"'+latestFilename+'"') #open latest version
         exit()
 
 #configure scan
+appjob("Choose scan type")
 print('\nS: Full System Scan\nN: Full Network Scan\nP: System & Network Scan (without current TCP/IP network connections)\nA: Full System & Network Scan')
 logtype=input(str('What would you like to log? [S/N/P/A] ')).upper()
 globalstart=time.time()
@@ -109,9 +112,11 @@ if logtype in ('S', 'N', 'P', 'A'):
 else:
     logtype='P'
     full=0
-    print('Invalid log-type. Defaulting to P')
-hostname=str(socket.gethostname())
-#m3/mm1: sysinfo
+    print('Invalid scan-type. Defaulting to P')
+
+hostname=str(socket.gethostname()) #computer name, used for filenames
+
+#system info scan
 colour('3f')
 if logtype in ('S', 'P', 'A'):
     appjob('Performing System Info Scan...')
@@ -153,16 +158,16 @@ if logtype in ('S', 'P', 'A'):
     print("Log completed in "+str(round(sysinfoduration, 2))+" seconds")
 
 if logtype in ('N', 'P', 'A'):
-    #m4/mm2: nmap
+    #network scan
     appjob('Performing Network Scan...')
     print("\nPerforming Network Scan...")
     netmapstart=time.time()
     print("[Preparing to log]")
     netmap='Network Logs'
     netmapdir=netmap+'\\'
-    netip=socket.gethostbyname(socket.gethostname())
+    netip=socket.gethostbyname(socket.gethostname()) #ipv4 network IP
     try:
-        pubip=urllib.request.urlopen('https://ident.me').read().decode('utf8')
+        pubip=urllib.request.urlopen('https://ident.me').read().decode('utf8') #public IP
         online=1
     except:
         print('[Error: No internet connection - Results will be limited]')
