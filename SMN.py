@@ -47,20 +47,23 @@ def colour(var):
 def wtitle(var):
     cmd('title '+str(var))
 appid='Scan Me Now'
-appname=appid+"  v"+ver
+appname=f'{appid} v{ver}'
 def appjob(job):
     if online==1:
-        wtitle(appname+' [Online] - '+str(job))
+        wtitle(f'{appname} [Online] - {job}')
     elif online==0:
-        wtitle(appname+' [Offline] - '+str(job))
+        wtitle(f'{appname} [Offline] - {job}')
 
 #update
 updateAttempt=0
 appjob('Checking for updates...')
 print('Checking for updates...')
 try: #remove previous version if just updated
+    global proj
     with open(proj+'.tmp', 'r') as content_file:
-        os.remove(str(content_file.read()))
+        oldFile=str(content_file.read())
+        if oldFile != os.path.basename(__file__): #if the old version has the current filename, don't delete
+            os.remove(oldFile)
     os.remove(proj+'.tmp')
 except:
     pass
