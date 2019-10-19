@@ -38,7 +38,7 @@ Requirements:
 # Screenshots
 Example Output: [System Info Logs](Example%20Output/System%20Info%20Logs/Cobalt.log) - [Network Logs](Example%20Output/Network%20Logs/Cobalt%20%5B192.168.0.32%5D.log)
 
-![SMN](https://imgur.com/i7UWfoa.png)
+![SMN](https://i.imgur.com/T1WHV48.png)
 
 First version of AIOAL (v1) coded on 10/11/18, completed at 5:30pm
 
