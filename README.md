@@ -3,7 +3,10 @@ A python script used for personal use to quickly and portably log useful informa
 
 This script logs various information about computer, it's hardware and network connections
 
+<a href="https://github.com/smcclennon/SMN/releases/latest/download/SMN.py"><img src="https://smcclennon.github.io/update/download.png">
+
 # Features
+```
 - Automatic Updates
 - Sort logs In folders; "Network Logs" & "System Info Logs"
 - Get Computer Name
@@ -22,10 +25,10 @@ This script logs various information about computer, it's hardware and network c
 - Get IPV4 Address
 - Get Public IP
 - Get Active Internal Connections
+```
 
-View [SMN Releases](https://github.com/smcclennon/AIO-AL/releases)
 # Installation
-- Run the script (preferably from a USB stick)
+`- Run the script (preferably from a USB stick)`
 
 Requirements:
 - Python 3+
@@ -40,3 +43,5 @@ Example Output: [System Info Logs](Example%20Output/System%20Info%20Logs/Cobalt.
 First version of AIOAL (v1) coded on 10/11/18, completed at 5:30pm
 
 Written in Python 3.7.4 on Windows 10
+
+<a href="https://www.freepik.com/free-photos-vectors/menu">Menu vector created by freepik - www.freepik.com</a>
