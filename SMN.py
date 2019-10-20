@@ -1,15 +1,15 @@
-#SMN
-ver='2.1.1'
-proj='SMN'
-#github.com/smcclennon/SMN
+# SMN
+# github.com/smcclennon/SMN
+ver = '2.1.1'
+proj = 'SMN'
 
 
-#m1: import
+# Import required libraries
 print("Importing required libraries...")
 import time
-importstart=time.time()
+importstart = time.time()
 try:
-    import os,datetime,socket,urllib.request,sys,platform,json
+    import os, datetime, socket, urllib.request, sys, platform, json
 except:
     print('\nError: unable to import one or more libraries\nVisit: github.com/smcclennon/SMN for support\n\nPress enter to exit...')
     input()
@@ -18,8 +18,8 @@ try:
     import psutil
 except:
     print('\nError: unable to import "psutil"')
-    confirm=input(str('Attempt to install "psutil"? [Y/n] ')).upper()
-    if confirm=='' or confirm=='Y':
+    confirm = input(str('Attempt to install "psutil"? [Y/n] ')).upper()
+    if confirm == '' or confirm == 'Y':
         try:
             os.system('pip install psutil --user')
             os.system('cls')
@@ -30,106 +30,131 @@ except:
         input()
         exit()
     exit()
-importend=time.time()
-importduration=importend-importstart
+importend = time.time()
+importduration = importend-importstart
 print("Import completed in "+str(round(importduration, 2))+" seconds")
 
 
+# Track whether SMN has an internet connection
+online = 0
 
-#m2: rules
-online=0
+
+# Run a specific command
 def cmd(cmd):
     os.system(cmd)
+
+
+# Clear the console window
 def cls():
     cmd('cls')
+
+
+# Assign a colour for the console window
 def colour(var):
     cmd('color '+str(var))
+
+
+# Set the console window title
 def wtitle(var):
     cmd('title '+str(var))
-appid='Scan Me Now'
-appname=f'{appid} v{ver}'
+
+
+# SMN identifiers
+appid = 'Scan Me Now'
+appname = f'{appid} v{ver}'
+
+
+# Online logic for the console window title
 def appjob(job):
-    if online==1:
+    if online == 1:
         wtitle(f'{appname} [Online] - {job}')
-    elif online==0:
+    elif online == 0:
         wtitle(f'{appname} [Offline] - {job}')
 
-#update
-updateAttempt=0
+
+# update
+updateAttempt = 0
 appjob('Checking for updates...')
 print('Checking for updates...')
-try: #remove previous version if just updated
+try:  # remove previous version if just updated
     with open(proj+'.tmp', 'r') as content_file:
-        oldFile=str(content_file.read())
-        if oldFile != os.path.basename(__file__): #if the old version has the current filename, don't delete
+        oldFile = str(content_file.read())
+        # if the old version has the current filename, don't delete
+        if oldFile != os.path.basename(__file__):
             os.remove(oldFile)
     os.remove(proj+'.tmp')
 except:
     pass
-while updateAttempt<3:
-    updateAttempt=updateAttempt+1
-    try: #Get latest version number (2.0.0)
+while updateAttempt < 3:
+    updateAttempt = updateAttempt+1
+    try:  # Get latest version number (2.0.0)
         with urllib.request.urlopen("https://smcclennon.github.io/update/api/2") as url:
-            online=1
-            repo=[]
+            online = 1
+            repo = []
             for line in url.readlines():
                 repo.append(line.decode().strip())
-            api=repo[0] #latest release details
-            proj=repo[1] #project name
-            ddl=repo[2] #direct download
+            api = repo[0]  # latest release details
+            proj = repo[1]  # Project name
+            ddl = repo[2]  # Direct download
         with urllib.request.urlopen(api) as url:
             data = json.loads(url.read().decode())
-            latest=data['tag_name'][1:]
-            patchNotes=data['body']
-        updateAttempt=3
+            latest = data['tag_name'][1:]
+            patchNotes = data['body']
+        updateAttempt = 3
     except:
-        latest='0'
-if latest>ver:
+        latest = '0'
+if latest > ver:
     print('\nUpdate available!')
     print('Latest Version: v'+latest)
     print('\n'+str(patchNotes)+'\n')
-    confirm=input(str('Update now? [Y/n] ')).upper()
-    if confirm=='' or confirm=='Y':
-        latestFilename=proj+' v'+str(latest)+'.py'
-        print('Downloading '+latestFilename+'...') #Download latest version to cwd
+    confirm = input(str('Update now? [Y/n] ')).upper()
+    if confirm == '' or confirm == 'Y':
+        latestFilename = proj+' v'+str(latest)+'.py'
+        # Download latest version to cwd
+        print('Downloading '+latestFilename+'...')
         urllib.request.urlretrieve(ddl, latestFilename)
-        f=open(proj+'.tmp', 'w') #write the current filename to SMN.tmp
+        f = open(proj+'.tmp', 'w')  # Write the current filename to SMN.tmp
         f.write(str(os.path.basename(__file__)))
         f.close()
         os.system('cls')
-        os.system('"'+latestFilename+'"') #open latest version
+        os.system('"'+latestFilename+'"')  # Open latest version
         exit()
 
-#configure scan
+# Configure the scan type
 appjob("Choose scan type")
-print('\nS: Full System Scan\nN: Full Network Scan\nP: System & Network Scan (without current TCP/IP network connections)\nA: Full System & Network Scan')
-logtype=input(str('What would you like to log? [S/N/P/A] ')).upper()
-globalstart=time.time()
+print('''
+S: Full System Scan
+N: Full Network Scan
+P: System & Network Scan (without current TCP/IP network connections)
+A: Full System & Network Scan''')
+
+logtype = input(str('What would you like to log? [s/n/P/a] ')).upper()
+globalstart = time.time()
 if logtype in ('S', 'N', 'P', 'A'):
-    if logtype=='P':
-        full=0
+    if logtype == 'P':
+        full = 0
     elif logtype in ('N', 'A'):
-        full=1
+        full = 1
 else:
-    logtype='P'
-    full=0
+    logtype = 'P'
+    full = 0
     print('Invalid scan-type. Defaulting to P')
 
-hostname=str(socket.gethostname()) #computer name, used for filenames
+hostname = str(socket.gethostname())  # computer name, used for filenames
 
-#system info scan
+# system info scan
 colour('3f')
 if logtype in ('S', 'P', 'A'):
     appjob('Performing System Info Scan...')
     print("\nPerforming System Info Scan...")
-    sysinfostart=time.time()
+    sysinfostart = time.time()
     print("[Preparing to log]")
-    sysinfo='System Info Logs'
-    sysinfodir=sysinfo+'\\'
+    sysinfo = 'System Info Logs'
+    sysinfodir = sysinfo+'\\'
     if not os.path.exists(sysinfo):
         os.makedirs(sysinfo)
     print("[Logging: Summary]")
-    file=open(sysinfodir+hostname+".log","w")
+    file = open(sysinfodir+hostname+".log", "w")
     file.write("=Log Generated By ["+appname+"]=\n")
     file.write(datetime.datetime.now().strftime("[%d/%m/%Y] - [%H:%M:%S]"))
     file.write("\n\n===Summary===")
@@ -151,51 +176,51 @@ if logtype in ('S', 'P', 'A'):
     cmd('systeminfo >"'+sysinfodir+hostname+'.log.tmp"')
     open(sysinfodir+hostname+".log", "a").writelines(open(sysinfodir+hostname+".log.tmp").readlines())
     os.remove(sysinfodir+hostname+".log.tmp")
-    sysinfoend=time.time()
-    sysinfoduration=sysinfoend-sysinfostart
-    file=open(sysinfodir+hostname+".log","a")
-    file.write("\n\n===================\nLog completed in "+str(round(sysinfoduration, 2))+" seconds")
+    sysinfoend = time.time()
+    sysinfoduration = sysinfoend-sysinfostart
+    file = open(sysinfodir+hostname+".log", "a")
+    file.write("\n\n===================Log completed in "+str(round(sysinfoduration, 2))+" seconds")
     file.close()
     print("Log completed in "+str(round(sysinfoduration, 2))+" seconds")
 
 if logtype in ('N', 'P', 'A'):
-    #network scan
+    # network scan
     appjob('Performing Network Scan...')
     print("\nPerforming Network Scan...")
-    netmapstart=time.time()
+    netmapstart = time.time()
     print("[Preparing to log]")
-    netmap='Network Logs'
-    netmapdir=netmap+'\\'
-    netip=socket.gethostbyname(socket.gethostname()) #ipv4 network IP
+    netmap = 'Network Logs'
+    netmapdir = netmap+'\\'
+    netip = socket.gethostbyname(socket.gethostname())  # ipv4 network IP
     try:
-        pubip=urllib.request.urlopen('https://ident.me').read().decode('utf8') #public IP
-        online=1
+        pubip = urllib.request.urlopen('https://ident.me').read().decode('utf8')  # public IP
+        online = 1
     except:
         print('[Error: No internet connection - Results will be limited]')
-        pubip='[Error: No internet connection]'
-        online=0
+        pubip = '[Error: No internet connection]'
+        online = 0
     if not os.path.exists(netmap):
         os.makedirs(netmap)
-    if online==1:
-        filename=str(hostname+" ["+netip+"]")
-    elif online==0:
-        filename=str(hostname+" ["+netip+"] [OFFLINE]")
+    if online == 1:
+        filename = str(hostname+" ["+netip+"]")
+    elif online == 0:
+        filename = str(hostname+" ["+netip+"] [OFFLINE]")
     print("[Logging: Summary]")
-    file=open(netmapdir+filename+".log","w")
+    file = open(netmapdir+filename+".log", "w")
     file.write("=Log Generated By ["+appname+"]=\n")
     file.write(datetime.datetime.now().strftime("[%d/%m/%Y] - [%H:%M:%S]"))
-    if full==1:
+    if full == 1:
         file.write('\nScan Type: Full')
-    elif full==0:
+    elif full == 0:
         file.write('\nScan Type: Partial')
-    if online==0:
+    if online == 0:
         file.write('\n\nError: No internet connection\nResults will be limited')
     file.write("\n\n===Summary===")
     file.write("\nHost Name: "+hostname)
     file.write("\nNetwork IP: "+netip)
     file.write("\nPublic IP: "+pubip)
     file.close()
-    file=open(netmapdir+filename+".log","a")
+    file = open(netmapdir+filename+".log", "a")
     print("[Logging: Windows IP Configuration]")
     file.write("\n\n===Windows IP Configuration===")
     cmd('ipconfig /all >"'+netmapdir+filename+'.log.tmp"')
@@ -221,17 +246,18 @@ if logtype in ('N', 'A'):
     file.writelines(open(netmapdir+filename+".log.tmp").readlines())
     os.remove(netmapdir+filename+".log.tmp")
     file.flush()
-    netmapend=time.time()
-    netmapduration=netmapend-netmapstart
-    file=open(netmapdir+filename+".log","a")
+    netmapend = time.time()
+    netmapduration = netmapend-netmapstart
+    file = open(netmapdir+filename+".log", "a")
     file.write("\n\n===================\nLog completed in "+str(round(netmapduration, 2))+" seconds")
     print("Log completed in "+str(round(netmapduration, 2))+" seconds")
 
 
 #m5: stats
 file.close()
-globalend=time.time()
-globalduration=globalend-globalstart+importduration
+globalend = time.time()
+globalduration = globalend-globalstart+importduration
 appjob('Complete!')
-print("\n\nAll "+proj+" Logging Jobs Completed In "+str(round(globalduration, 2))+" seconds")
+print("\n\nAll "+proj+" Logging Jobs Completed In " +
+      str(round(globalduration, 2))+" seconds")
 cmd('timeout 5')
