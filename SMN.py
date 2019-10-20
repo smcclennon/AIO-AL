@@ -19,7 +19,7 @@ try:
 except:
     print('\nError: unable to import "psutil"')
     confirm=input(str('Attempt to install "psutil"? [Y/n] ')).upper()
-    if confirm=='Y':
+    if confirm=='' or confirm=='Y':
         try:
             os.system('pip install psutil --user')
             os.system('cls')
@@ -59,7 +59,6 @@ updateAttempt=0
 appjob('Checking for updates...')
 print('Checking for updates...')
 try: #remove previous version if just updated
-    global proj
     with open(proj+'.tmp', 'r') as content_file:
         oldFile=str(content_file.read())
         if oldFile != os.path.basename(__file__): #if the old version has the current filename, don't delete
@@ -72,7 +71,6 @@ while updateAttempt<3:
     try: #Get latest version number (2.0.0)
         with urllib.request.urlopen("https://smcclennon.github.io/update/api/2") as url:
             online=1
-            global repo
             repo=[]
             for line in url.readlines():
                 repo.append(line.decode().strip())
@@ -91,7 +89,7 @@ if latest>ver:
     print('Latest Version: v'+latest)
     print('\n'+str(patchNotes)+'\n')
     confirm=input(str('Update now? [Y/n] ')).upper()
-    if confirm=='Y':
+    if confirm=='' or confirm=='Y':
         latestFilename=proj+' v'+str(latest)+'.py'
         print('Downloading '+latestFilename+'...') #Download latest version to cwd
         urllib.request.urlretrieve(ddl, latestFilename)
