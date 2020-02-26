@@ -1,5 +1,5 @@
 #SMN
-ver='2.1.1'
+ver='2.2.0'
 proj='SMN'
 #github.com/smcclennon/SMN
 
@@ -10,6 +10,7 @@ import time
 importstart=time.time()
 try:
     import os,datetime,socket,urllib.request,sys,platform,json
+    from distutils.version import LooseVersion as semver
 except:
     print('\nError: unable to import one or more libraries\nVisit: github.com/smcclennon/SMN for support\n\nPress enter to exit...')
     input()
@@ -19,7 +20,7 @@ try:
 except:
     print('\nError: unable to import "psutil"')
     confirm=input(str('Attempt to install "psutil"? [Y/n] ')).upper()
-    if confirm=='Y':
+    if confirm!='N':
         try:
             os.system('pip install psutil --user')
             os.system('cls')
@@ -69,26 +70,33 @@ while updateAttempt<3:
     try: #Get latest version number (2.0.0)
         with urllib.request.urlopen("https://smcclennon.github.io/update/api/2") as url:
             online=1
-            global repo
-            repo=[]
+            repo = []
             for line in url.readlines():
                 repo.append(line.decode().strip())
-            api=repo[0] #latest release details
-            proj=repo[1] #project name
-            ddl=repo[2] #direct download
-        with urllib.request.urlopen(api) as url:
+            apiLatest = repo[0]  # Latest release details
+            proj = repo[1]  # Project name
+            ddl = repo[2]  # Direct download
+            apiReleases = repo[3]  # List of patch notes
+        with urllib.request.urlopen(apiLatest) as url:
             data = json.loads(url.read().decode())
-            latest=data['tag_name'][1:]
-            patchNotes=data['body']
-        updateAttempt=3
+            latest = data['tag_name'][1:]
+        del data  # Prevent overlapping variable data
+        release = json.loads(urllib.request.urlopen(
+            apiReleases).read().decode())
+        releases = [
+            (data['tag_name'], data['body'])
+            for data in release
+            if semver(data['tag_name'][1:]) > semver(ver)]
+        updateAttempt = 3
     except:
         latest='0'
-if latest>ver:
-    print('\nUpdate available!')
-    print('Latest Version: v'+latest)
-    print('\n'+str(patchNotes)+'\n')
-    confirm=input(str('Update now? [Y/n] ')).upper()
-    if confirm=='Y':
+if semver(latest) > semver(ver):
+    print('Update available!      ')
+    print(f'Latest Version: v{latest}\n')
+    for release in releases:
+        print(f'{release[0]}:\n{release[1]}\n')
+    confirm = input(str('Update now? [Y/n] ')).upper()
+    if confirm != 'N':
         latestFilename=proj+' v'+str(latest)+'.py'
         print('Downloading '+latestFilename+'...') #Download latest version to cwd
         urllib.request.urlretrieve(ddl, latestFilename)
