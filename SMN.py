@@ -96,8 +96,7 @@ print("Importing required libraries...")
 import time
 importstart=time.time()
 try:
-    import os,datetime,socket,urllib.request,sys,platform,json
-    from distutils.version import LooseVersion as semver
+    import os, datetime, socket, sys, platform
 except:
     print('\nError: unable to import one or more libraries\nVisit: github.com/smcclennon/SMN for support\n\nPress enter to exit...')
     input()
