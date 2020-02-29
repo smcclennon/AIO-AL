@@ -81,7 +81,7 @@ if os.name == 'nt': ctypes.windll.kernel32.SetConsoleTitleW(f'   == {proj} v{ver
 
 import os
 if os.name != 'nt':
-    print(f'{proj} currently only supports Windows, and we have no plans to expand support to Unix any time soon\ndue to our relyance on Windows-specific commands and features')
+    print(f'{proj} currently only supports Windows, and we have no plans to expand support to Unix any time soon\ndue to our reliance on Windows-specific commands and features')
     print('\nHowever, this script will continue to recieve updates,\nincluding the possibility for Unix support in the future :)')
     print(f'\nhttps://github.com/smcclennon/{proj}')
     print('\nPress enter to exit')
