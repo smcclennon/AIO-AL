@@ -35,13 +35,11 @@ if os.name == 'nt':
 updateAttempt = 0  # Keep track of failed attempts
 print('Checking for updates...', end='\r')
 while updateAttempt < 3:  # Try to retry the update up to 3 times if an error occurs
-    updateAttempt = updateAttempt+1
+    updateAttempt += 1
     try:
         with urllib.request.urlopen("https://smcclennon.github.io/update/api/2") as internalAPI:
             online = True
-            repo = []
-            for line in internalAPI.readlines():
-                repo.append(line.decode().strip())
+            repo = [line.decode().strip() for line in internalAPI.readlines()]
             apiLatest = repo[0]  # Latest release details
             proj = repo[1]  # Project name
             ddl = repo[2]  # Direct download link
@@ -65,7 +63,7 @@ if semver(latest) > semver(ver):
     print(f'Latest Version: v{latest}\n')
     for release in releases:
         print(f'{release[0]}:\n{release[1]}\n')
-    confirm = input(str('Update now? [Y/n] ')).upper()
+    confirm = input('Update now? [Y/n] ').upper()
     if confirm != 'N':
         if os.name == 'nt': ctypes.windll.kernel32.SetConsoleTitleW(f'   == {proj} v{ver} ==   Installing updates...')
         print(f'Downloading {proj} v{latest}...')
@@ -105,7 +103,7 @@ try:
     import psutil
 except:
     print('\nError: unable to import "psutil"')
-    confirm=input(str('Attempt to install "psutil"? [Y/n] ')).upper()
+    confirm = input('Attempt to install "psutil"? [Y/n] ').upper()
     if confirm!='N':
         try:
             os.system('pip install psutil --user')
@@ -119,7 +117,7 @@ except:
     exit()
 importend=time.time()
 importduration=importend-importstart
-print("Import completed in "+str(round(importduration, 2))+" seconds")
+print(f"Import completed in {str(round(importduration, 2))} seconds")
 
 
 
@@ -129,16 +127,16 @@ def cmd(cmd):
 def cls():
     cmd('cls')
 def colour(var):
-    cmd('color '+str(var))
+    cmd(f'color {str(var)}')
 def wtitle(var):
-    cmd('title '+str(var))
+    cmd(f'title {str(var)}')
 appid='Scan Me Now'
-appname=appid+"  v"+ver
+appname = f"{appid}  v{ver}"
 def appjob(job):
     if online:
-        wtitle(appname+' [Online] - '+str(job))
+        wtitle(f'{appname} [Online] - {str(job)}')
     else:
-        wtitle(appname+' [Offline] - '+str(job))
+        wtitle(f'{appname} [Offline] - {str(job)}')
 
 
 #configure scan
